@@ -4,6 +4,8 @@ const options = {
 	default: {
 		u: 'http://localhost:8545',
 		A: '',
+		b: 0,
+		B: 'latest',
 		c: ''
 	}
 };
@@ -33,8 +35,8 @@ if (jsonabi != '') {
 const ABInstance = new web3.eth.Contract(abi,addrTest);
 ABInstance.getPastEvents(evento, {
     filter: {}, // Using an array means OR: e.g. 20 or 23
-    fromBlock: 0,
-    toBlock: 'latest'
+    fromBlock: argv['b'],
+    toBlock: argv['B']
 }, function(error, events){ console.log(JSON.stringify(events)); });
 
 
