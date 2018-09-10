@@ -12,28 +12,19 @@ const options = {
 const argv = require('minimist')(process.argv.slice(2), options);
 //console.log(argv);
 
-var neturl = argv['u'];
-var contrato = argv['c'];
-var addrTest = argv['a'];
-var evento = argv['e'];
-var jsonabi = argv['A'];
-
-
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider(neturl));
+const web3 = new Web3(new Web3.providers.HttpProvider(argv['u']));
 
 
 var abi;
-if (jsonabi != '') {
-	abi = require(jsonabi);
+if (argv['A'] != '') {
+	abi = require(argv['A']); //Json with just the ABI
 } else {
-	abi = require('../build/contracts/'.concat(contrato,'.json')).abi;
+	abi = require('../build/contracts/'.concat(argv['c'],'.json')).abi;
 }
 
-
-
-const ABInstance = new web3.eth.Contract(abi,addrTest);
-ABInstance.getPastEvents(evento, {
+const ABInstance = new web3.eth.Contract(abi, argv['a']);
+ABInstance.getPastEvents(argv['e'], {
     filter: {}, // Using an array means OR: e.g. 20 or 23
     fromBlock: argv['b'],
     toBlock: argv['B']

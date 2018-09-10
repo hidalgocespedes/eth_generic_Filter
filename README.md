@@ -22,7 +22,7 @@ node filterGeneric.js -u https://mainnet.infura.io/<your-infura-key> -c WhiteLis
 ```
 
 
-You will get a json with with the events that pass the filter.
+You will get a json with the events that pass the filter.
 
 
 # Parameters
